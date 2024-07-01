@@ -58,8 +58,11 @@ private static Object con;
    
         initComponents();
         setIconImage();
+         cleanholidaylist();
         holidayCatogoryList();
+       
         decideHoliday();
+        removeconsiderationlist();
         considerationlist();
         startjcomboxall();
         showpaticulare();
@@ -1088,7 +1091,7 @@ private static Object con;
 
         jPanel14.setBackground(new java.awt.Color(204, 204, 255));
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Select Emp Id and Name" }));
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
         jComboBox5.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jComboBox5FocusGained(evt);
@@ -2332,7 +2335,7 @@ private static Object con;
             }
         });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Select Emp Id and Name"}));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"** Select Employee **"}));
         jComboBox2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jComboBox2FocusGained(evt);
@@ -2598,6 +2601,7 @@ private static Object con;
            
     String selectedValuess;
     selectedValuess = jComboBox5.getSelectedItem().toString();
+    
     String userInput = jTextArea1.getText(); // Get user input
               
       int searcid;
@@ -2645,9 +2649,11 @@ private static Object con;
             ignoreit=null;
         }
        
-      
-
-        String checkQuery = "SELECT 1 FROM biometric.consideration WHERE Emp_id = ? AND Date = ?";
+      if(selectedValuess==""){
+          
+      }
+      else{
+          String checkQuery = "SELECT 1 FROM biometric.consideration WHERE Emp_id = ? AND Date = ?";
             PreparedStatement checkStatement = con.prepareStatement(checkQuery);
             checkStatement.setInt(1, searcid);
             checkStatement.setString(2, TheDate);
@@ -2715,6 +2721,10 @@ private static Object con;
                 insertStatement.executeUpdate();
                 System.out.println("New record inserted successfully.");
             }
+          
+      }
+
+        
        
         }
 catch (Exception e) {
@@ -2722,12 +2732,19 @@ catch (Exception e) {
         }  
         
         //Date formate
-    jComboBox5.removeAllItems();
+   /* jComboBox5.removeAllItems();
     jComboBox4.removeAllItems();
     jComboBox6.removeAllItems();
     jComboBox21.removeAllItems();
-    jComboBox22.removeAllItems();
+    jComboBox22.removeAllItems();*/
+   cleanholidaylist();
+     holidayCatogoryList();
+    
+         decideHoliday();
+ 
+    removeconsiderationlist();
     considerationlist();
+    
     
     
     }//GEN-LAST:event_jButton13ActionPerformed
@@ -2759,11 +2776,11 @@ catch (Exception e) {
 catch (Exception e) {
             e.printStackTrace();
         }  
-          jComboBox3.removeAllItems();
+          cleanholidaylist();
         holidayCatogoryList();
-         jComboBox7.removeAllItems();
+
          decideHoliday();
-       // jComboBox7.removeAllItems();
+       
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
@@ -2795,9 +2812,9 @@ catch (Exception e) {
             e.printStackTrace();
         }  
             jTextField1.setText("");
-           jComboBox3.removeAllItems();
+          
         holidayCatogoryList();
-         jComboBox7.removeAllItems();
+     cleanholidaylist();
          decideHoliday();
     }//GEN-LAST:event_jButton11ActionPerformed
 
@@ -3064,7 +3081,7 @@ String all = null;
             Logger.getLogger(NewClass.class.getName()).log(Level.SEVERE, null, ex);
         }
          document.open();
-          Image img = Image.getInstance("KITS.png");
+          Image img = Image.getInstance("support/KITS.png");
        img.scaleAbsolute(150,150);
        img.setAlignment(1);
          PdfPTable table = new PdfPTable(12);
@@ -3114,6 +3131,9 @@ catch (Exception e) {
              }      catch (Exception e) {
             e.printStackTrace();
         }
+             
+             
+             
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
@@ -3188,7 +3208,7 @@ while(rs.next()){
             Logger.getLogger(NewClass.class.getName()).log(Level.SEVERE, null, ex);
         }
          document.open();
-          Image img = Image.getInstance("KITS.png");
+          Image img = Image.getInstance("support/KITS.png");
        img.scaleAbsolute(150,150);
        img.setAlignment(1);
            PdfPTable table = new PdfPTable(12);
@@ -4361,9 +4381,9 @@ while(rs.next()){
             Logger.getLogger(NewClass.class.getName()).log(Level.SEVERE, null, ex);
         }
          document.open();
-          Image img = Image.getInstance("KITS.png");
-       img.scaleAbsolute(150,150);
-       img.setAlignment(1);
+         Image img = Image.getInstance("support/KITS.png");
+     img.scaleAbsolute(150,150);
+      img.setAlignment(1);
            PdfPTable table = new PdfPTable(7);
            table.addCell("Emp Id");
             table.addCell("Emp Name");
@@ -4483,7 +4503,7 @@ while(rs.next()){
             Logger.getLogger(NewClass.class.getName()).log(Level.SEVERE, null, ex);
         }
          document.open();
-          Image img = Image.getInstance("KITS.png");
+          Image img = Image.getInstance("support/KITS.png");
        img.scaleAbsolute(150,150);
        img.setAlignment(1);
            PdfPTable table = new PdfPTable(7);
@@ -4739,11 +4759,12 @@ catch (Exception e) {
 catch (Exception e) {
             e.printStackTrace();
         }  
-            jComboBox5.removeAllItems();
+           /* jComboBox5.removeAllItems();
     jComboBox4.removeAllItems();
     jComboBox6.removeAllItems();
     jComboBox21.removeAllItems();
-    jComboBox22.removeAllItems();
+    jComboBox22.removeAllItems();*/
+            removeconsiderationlist();
     considerationlist();
     }//GEN-LAST:event_jButton58ActionPerformed
 
@@ -4822,11 +4843,13 @@ catch (Exception e) {
 
     private void jButton59ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton59ActionPerformed
         // TODO add your handling code here:
-           jComboBox5.removeAllItems();
-    jComboBox4.removeAllItems();
+           removeconsiderationlist();
+        considerationlist();
+         //  jComboBox5.removeAllItems();
+    /*jComboBox4.removeAllItems();
     jComboBox6.removeAllItems();
     jComboBox21.removeAllItems();
-    jComboBox22.removeAllItems();
+    jComboBox22.removeAllItems();*/
     }//GEN-LAST:event_jButton59ActionPerformed
 
     private void jComboBox3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox3MouseClicked
@@ -5112,7 +5135,10 @@ setIconImage(originalImage);
  }
 
     private void holidayCatogoryList() {
+         jComboBox3.addItem("** Select Holiday **");
           try {
+              
+              cleanholidaylist();
             String url = "jdbc:mysql://localhost:3306/biometric";
             String uname = "root";
             String password = "123456789";
@@ -5152,6 +5178,8 @@ ResultSet rs=preparedStatement.executeQuery();
         }   }
 
     private void decideHoliday() {
+    
+        jComboBox7.addItem("** Select Holiday **");
            try {
             String url = "jdbc:mysql://localhost:3306/biometric";
             String uname = "root";
@@ -5192,6 +5220,9 @@ ResultSet rs=preparedStatement.executeQuery();
         }   }
 
     private void considerationlist() {
+        
+     jComboBox5.addItem("** Select Employee **");
+     jComboBox5.addItem("Consider all Employee");
            try {
             String url = "jdbc:mysql://localhost:3306/biometric";
             String uname = "root";
@@ -5450,8 +5481,9 @@ ResultSet rs=preparedStatement.executeQuery();
     }
 
     private void showpaticulare() {
-        jComboBox2.removeAllItems();
+        
         jComboBox2.addItem("Select Emp Id and Name");
+        cleandatalist();
     try {
             String url = "jdbc:mysql://localhost:3306/biometric";
             String uname = "root";
@@ -5492,7 +5524,32 @@ ResultSet rs=preparedStatement.executeQuery();
         }  
     }
 
-    private static class NewClass {
+    private void removeconsiderationlist() {
+     if (jComboBox5.getItemCount() > 1) {
+           jComboBox5.removeItemAt(1); // Remove item at index 1
+           removeconsiderationlist();
+        }
+    }
+      private void cleanholidaylist() {
+     if (jComboBox3.getItemCount() > 1) {
+           jComboBox3.removeItemAt(1); // Remove item at index 1
+           cleanholidaylist();
+        }
+      if (jComboBox7.getItemCount() > 1) {
+           jComboBox7.removeItemAt(1); // Remove item at index 1
+           cleanholidaylist();
+        }
+    }
+        private void cleandatalist() {
+     if (jComboBox2.getItemCount() > 1) {
+           jComboBox2.removeItemAt(1); // Remove item at index 1
+           cleandatalist();
+        }
+    }
+      
+    
+
+    class NewClass {
 
         public NewClass() {
         }
