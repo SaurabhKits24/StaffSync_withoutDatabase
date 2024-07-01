@@ -2745,16 +2745,12 @@ catch (Exception e) {
       }
       else{  
 
-              
-   
-            searcid = Integer.parseInt(selectedValuess.replaceAll("[^0-9]", ""));
-
-       
+    searcid = Integer.parseInt(selectedValuess.replaceAll("[^0-9]", ""));
      searchname=selectedValuess.replaceAll("[0-9]","");
       searchname=searchname.replaceAll("^\\s+", "");
 
  // Database conectivity
-   
+
         try {
             String url = "jdbc:mysql://localhost:3306/biometric";
             String uname = "root";
@@ -2771,8 +2767,6 @@ catch (Exception e) {
                 return; // Exit if connection fails
             }
    
-       
-  
           String checkQuery = "SELECT 1 FROM biometric.consideration WHERE Emp_id = ? AND Date = ?";
             PreparedStatement checkStatement = con.prepareStatement(checkQuery);
             checkStatement.setInt(1, searcid);
@@ -2844,15 +2838,12 @@ catch (Exception e) {
           
       }
 
-        
        
         
 catch (Exception e) {
             e.printStackTrace();
         } 
         } 
-        
-   
  
             decideHoliday();
    
@@ -2942,8 +2933,6 @@ catch (Exception e) {
         chooser.showOpenDialog(null);
         File f = chooser.getSelectedFile();
         String employee=f.getAbsolutePath();
-      
-
        // jTextField1.setText(filename);
         System.out.println(employee);
         try {
@@ -2980,8 +2969,6 @@ catch (Exception e) {
                 }  
           
                 }
-  
-
         }
 catch (Exception e) {
             e.printStackTrace();
