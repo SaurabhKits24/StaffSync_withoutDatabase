@@ -2572,14 +2572,15 @@ private static Object con;
     startTimemm = jComboBox6.getSelectedItem().toString();
     String startTimess="00";
      String timein;
-                
-   
+     
      String endTimehh;
     endTimehh = jComboBox21.getSelectedItem().toString();
      String endTimemm;
     endTimemm = jComboBox22.getSelectedItem().toString();
     String endTimess="00";
     String timeout;
+    int searcid;
+    String searchname;
     
     if(startTimehh.equals("HH")&& startTimemm.equals("MM")){
         timein=null;
@@ -2601,34 +2602,11 @@ private static Object con;
            
     String selectedValuess;
     selectedValuess = jComboBox5.getSelectedItem().toString();
-    
-    String userInput = jTextArea1.getText(); // Get user input
-              
-      int searcid;
-            searcid = Integer.parseInt(selectedValuess.replaceAll("[^0-9]", ""));
-
-       
-      String searchname=selectedValuess.replaceAll("[0-9]","");
-      searchname=searchname.replaceAll("^\\s+", "");
-
- // Database conectivity
-   
-        try {
-            String url = "jdbc:mysql://localhost:3306/biometric";
-            String uname = "root";
-            String password = "123456789";
-
-            // Establish database connection
-            Connection con;
-            try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                con = DriverManager.getConnection(url, uname, password);
-                System.out.println("Database Connected");
-            } catch (ClassNotFoundException | SQLException e) {
-                e.printStackTrace();
-                return; // Exit if connection fails
-            }
-    String ignoreit="";
+        String userInput = jTextArea1.getText(); // Get user input
+        
+        
+        // Ignore query
+         String ignoreit="";
     
         
      
@@ -2648,11 +2626,147 @@ private static Object con;
         else{
             ignoreit=null;
         }
+    
+  if(selectedValuess.equals("Consider all Employee")){
+        try {
+            String url = "jdbc:mysql://localhost:3306/biometric";
+            String uname = "root";
+            String password = "123456789";
+
+            // Establish database connection
+            Connection con;
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                con = DriverManager.getConnection(url, uname, password);
+                System.out.println("Database Connected");
+            } catch (ClassNotFoundException | SQLException e) {
+                e.printStackTrace();
+                return; // Exit if connection fails
+            }
+          System.out.println("data selected");
+           //  Statement statementdisplay = con.createStatement();
+
+            // Execute query
+            String considerall="SELECT distinct(Emp_id),Emp_Name FROM biometric.all;";
+             java.sql.Statement statement = con.createStatement();
+                 ResultSet resultSet = statement.executeQuery(considerall);
+            // Iterate through the result set
+            while (resultSet.next()) {
+                int id = resultSet.getInt("Emp_id");
+               String name = resultSet.getString("Emp_Name");
+               // double salary = resultSet.getDouble("salary");
+
+                // Display each row
+                System.out.println("Employee ID: " + id);
+                System.out.println("Name: " + name);
+               // System.out.println("Salary: " + salary);
+                System.out.println();
+                searcid=id;
+                searchname=name;
+                // Delay for 2 seconds (2000 milliseconds) before displaying the next row
+              //  Thread.sleep(2000); // Note: Handle InterruptedException appropriately
+                  String checkQuery = "SELECT 1 FROM biometric.consideration WHERE Emp_id = ? AND Date = ?";
+            PreparedStatement checkStatement = con.prepareStatement(checkQuery);
+            checkStatement.setInt(1, searcid);
+            checkStatement.setString(2, TheDate);
+            ResultSet resultSetupdate = checkStatement.executeQuery();
+            if (resultSetupdate.next()) {
+                // Record exists, update it
+                String updateQuery = "UPDATE biometric.consideration SET Reasone = ?,Time_in=?,Time_out=?,ignoreing=? WHERE Emp_id = ? AND Date = ?";
+                PreparedStatement updateStatement = con.prepareStatement(updateQuery);
+                updateStatement.setString(1, userInput);
+                 if (timein == null)
+                {
+                     updateStatement.setNull(2, java.sql.Types.VARCHAR);
+                }
+                else{
+                    updateStatement.setString(2, timein); 
+                }
+                if (timeout== null)
+                {
+                     updateStatement.setNull(3, java.sql.Types.VARCHAR);
+                }
+                else{
+                    updateStatement.setString(3, timeout);
+                }
+                
+               if (ignoreit == null) {
+                    updateStatement.setNull(4, java.sql.Types.VARCHAR); // Store as null
+               } 
+               else {
+                   updateStatement.setString(4, ignoreit); // Store as string
+               }
+                updateStatement.setInt(5, searcid);
+                updateStatement.setString(6, TheDate);
+                updateStatement.executeUpdate();
+                System.out.println("Record updated successfully.");
+            } else {
+                // Record doesn't exist, insert a new one
+                String insertQuery = "INSERT INTO biometric.consideration (Emp_id,Emp_Name,Date,Time_in,Time_out,ignoreing,Reasone) VALUES (?,?,?,?,?,?,?)";
+                PreparedStatement insertStatement = con.prepareStatement(insertQuery);
+                insertStatement.setInt(1, searcid);
+                 insertStatement.setString(2, searchname);
+                insertStatement.setString(3, TheDate);
+                if (timein == null)
+                {
+                     insertStatement.setNull(4, java.sql.Types.VARCHAR);
+                }
+                else{
+                    insertStatement.setString(4, timein); 
+                }
+                if (timeout== null)
+                {
+                     insertStatement.setNull(5, java.sql.Types.VARCHAR);
+                }
+                else{
+                    insertStatement.setString(5, timeout);
+                }
+                
+                
+               if (ignoreit == null) {
+                    insertStatement.setNull(6, java.sql.Types.VARCHAR); // Store as null
+               } 
+               else {
+                   insertStatement.setString(6, ignoreit); // Store as string
+               }
+                insertStatement.setString(7, userInput);
+                insertStatement.executeUpdate();
+                System.out.println("New record inserted successfully.");
+            }
+            }
+
+              }
        
-      if(selectedValuess==""){
-          
+        
+catch (Exception e) {
+            e.printStackTrace();
+        } 
+
       }
-      else{
+      else{  
+
+    searcid = Integer.parseInt(selectedValuess.replaceAll("[^0-9]", ""));
+     searchname=selectedValuess.replaceAll("[0-9]","");
+      searchname=searchname.replaceAll("^\\s+", "");
+
+ // Database conectivity
+
+        try {
+            String url = "jdbc:mysql://localhost:3306/biometric";
+            String uname = "root";
+            String password = "123456789";
+
+            // Establish database connection
+            Connection con;
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                con = DriverManager.getConnection(url, uname, password);
+                System.out.println("Database Connected");
+            } catch (ClassNotFoundException | SQLException e) {
+                e.printStackTrace();
+                return; // Exit if connection fails
+            }
+   
           String checkQuery = "SELECT 1 FROM biometric.consideration WHERE Emp_id = ? AND Date = ?";
             PreparedStatement checkStatement = con.prepareStatement(checkQuery);
             checkStatement.setInt(1, searcid);
@@ -2724,25 +2838,15 @@ private static Object con;
           
       }
 
-        
        
-        }
+        
 catch (Exception e) {
             e.printStackTrace();
-        }  
-        
-        //Date formate
-   /* jComboBox5.removeAllItems();
-    jComboBox4.removeAllItems();
-    jComboBox6.removeAllItems();
-    jComboBox21.removeAllItems();
-    jComboBox22.removeAllItems();*/
-   cleanholidaylist();
-     holidayCatogoryList();
-    
-         decideHoliday();
+        } 
+        } 
  
-    removeconsiderationlist();
+            decideHoliday();
+   
     considerationlist();
     
     
@@ -2829,8 +2933,6 @@ catch (Exception e) {
         chooser.showOpenDialog(null);
         File f = chooser.getSelectedFile();
         String employee=f.getAbsolutePath();
-      
-
        // jTextField1.setText(filename);
         System.out.println(employee);
         try {
@@ -2867,8 +2969,6 @@ catch (Exception e) {
                 }  
           
                 }
-  
-
         }
 catch (Exception e) {
             e.printStackTrace();
@@ -4764,7 +4864,7 @@ catch (Exception e) {
     jComboBox6.removeAllItems();
     jComboBox21.removeAllItems();
     jComboBox22.removeAllItems();*/
-            removeconsiderationlist();
+          
     considerationlist();
     }//GEN-LAST:event_jButton58ActionPerformed
 
@@ -4843,13 +4943,9 @@ catch (Exception e) {
 
     private void jButton59ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton59ActionPerformed
         // TODO add your handling code here:
-           removeconsiderationlist();
+           
         considerationlist();
-         //  jComboBox5.removeAllItems();
-    /*jComboBox4.removeAllItems();
-    jComboBox6.removeAllItems();
-    jComboBox21.removeAllItems();
-    jComboBox22.removeAllItems();*/
+       
     }//GEN-LAST:event_jButton59ActionPerformed
 
     private void jComboBox3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox3MouseClicked
@@ -5222,6 +5318,7 @@ ResultSet rs=preparedStatement.executeQuery();
     private void considerationlist() {
         
      jComboBox5.addItem("** Select Employee **");
+       removeconsiderationlist();
      jComboBox5.addItem("Consider all Employee");
            try {
             String url = "jdbc:mysql://localhost:3306/biometric";
