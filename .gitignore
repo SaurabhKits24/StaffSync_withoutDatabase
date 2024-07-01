@@ -1,3 +1,5 @@
 support/biometric.sqlite
 build
 /dist/
+output
+README
