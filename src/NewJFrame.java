@@ -58,7 +58,7 @@ private static Object con;
    
         initComponents();
         setIconImage();
-         cleanholidaylist();
+         
         holidayCatogoryList();
        
         decideHoliday();
@@ -2880,7 +2880,7 @@ catch (Exception e) {
 catch (Exception e) {
             e.printStackTrace();
         }  
-          cleanholidaylist();
+        
         holidayCatogoryList();
 
          decideHoliday();
@@ -2918,7 +2918,7 @@ catch (Exception e) {
             jTextField1.setText("");
           
         holidayCatogoryList();
-     cleanholidaylist();
+     
          decideHoliday();
     }//GEN-LAST:event_jButton11ActionPerformed
 
@@ -5232,6 +5232,7 @@ setIconImage(originalImage);
 
     private void holidayCatogoryList() {
          jComboBox3.addItem("** Select Holiday **");
+         cleanholidaylist();
           try {
               
               cleanholidaylist();
@@ -5276,6 +5277,7 @@ ResultSet rs=preparedStatement.executeQuery();
     private void decideHoliday() {
     
         jComboBox7.addItem("** Select Holiday **");
+        cleanholidaylist();
            try {
             String url = "jdbc:mysql://localhost:3306/biometric";
             String uname = "root";
@@ -5318,8 +5320,8 @@ ResultSet rs=preparedStatement.executeQuery();
     private void considerationlist() {
         
      jComboBox5.addItem("** Select Employee **");
-       removeconsiderationlist();
      jComboBox5.addItem("Consider all Employee");
+      removeconsiderationlist();
            try {
             String url = "jdbc:mysql://localhost:3306/biometric";
             String uname = "root";
@@ -5622,8 +5624,8 @@ ResultSet rs=preparedStatement.executeQuery();
     }
 
     private void removeconsiderationlist() {
-     if (jComboBox5.getItemCount() > 1) {
-           jComboBox5.removeItemAt(1); // Remove item at index 1
+     if (jComboBox5.getItemCount() > 2) {
+           jComboBox5.removeItemAt(2); // Remove item at index 1
            removeconsiderationlist();
         }
     }
