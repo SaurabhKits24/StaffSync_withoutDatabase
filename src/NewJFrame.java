@@ -43,7 +43,7 @@ import java.io.IOException;
 import java.net.URL;
 import javax.swing.ImageIcon;
 
-
+import java.sql.Time;
 /**
  *
  * @author Dell
@@ -3444,7 +3444,9 @@ catch (Exception e) {
                
             String startTime=String.format("%s:%s:%s",startTimehh,startTimemm,startTimess);
                 String endTime = String.format("%s:%s:%s", endTimehh, endTimemm, endTimess);
+                System.out.println("endTime");
            // Morning Adjustment
+       
            
                    String updatepartial_all="update biometric.all\n" +
 "JOIN biometric.partiale_all\n" +
@@ -3486,7 +3488,8 @@ catch (Exception e) {
             PreparedStatement adjusting = con.prepareStatement(adjustime);
               adjusting.setString(1, endTime);
               adjusting.setString(2, endTime);
-            adjusting.executeUpdate();      
+            adjusting.executeUpdate();  
+          
             System.out.println("start date and end date");
             //Double finger print
                  String click = "UPDATE biometric.all\n" +
@@ -3561,7 +3564,15 @@ catch (Exception e) {
             
             ignoringupdate.executeUpdate();  
             
-            
+                  String check="checking";
+             String checking = "UPDATE biometric.all\n" +
+                     "SET Remark_in = '" + check + "'\n" +
+                     "WHERE time_out > '" + endTime + "' AND time_in = time_out;";
+             
+System.out.println(checking);
+            PreparedStatement checkwithme = con.prepareStatement(checking);
+            int rowsUpdated = checkwithme.executeUpdate();
+            System.out.println("Rows updated: " + rowsUpdated);
             
             
 
