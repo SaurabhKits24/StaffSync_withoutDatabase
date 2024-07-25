@@ -80,27 +80,15 @@ public class Registration extends javax.swing.JFrame {
 
         jLabel3.setText("Last Name");
 
-        edtfirstname.setText("jTextField1");
-
-        edtlastname.setText("edtlastname");
-
         jLabel4.setText("Mail ID");
 
-        edtmailid.setText("jTextField3");
-
         jLabel5.setText("Phone No:");
-
-        edtphonenumber.setText("jTextField4");
 
         jLabel6.setText("+91");
 
         jLabel7.setText("OTP");
 
-        edtotp.setText("jTextField5");
-
         jButton3.setText("Verify");
-
-        edtpassword.setText("jPasswordField1");
 
         jLabel8.setText("Password");
 
@@ -249,7 +237,9 @@ System.out.println(inserting);
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        
         dispose();
+       
          LoginPage main = new LoginPage();
                         main.show();
     }//GEN-LAST:event_jButton2ActionPerformed

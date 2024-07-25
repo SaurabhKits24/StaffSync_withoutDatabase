@@ -190,14 +190,8 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="edtfirstname">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jTextField1"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="edtlastname">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="edtlastname"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
@@ -205,9 +199,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="edtmailid">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jTextField3"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
@@ -215,9 +206,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="edtphonenumber">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jTextField4"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
@@ -230,9 +218,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="edtotp">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jTextField5"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButton3">
           <Properties>
@@ -240,9 +225,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JPasswordField" name="edtpassword">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jPasswordField1"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
