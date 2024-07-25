@@ -26,24 +26,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.StringTokenizer;
 import javax.swing.JFileChooser;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerDateModel;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import javax.swing.ImageIcon;
-
-import java.sql.Time;
 /**
  *
  * @author Dell
