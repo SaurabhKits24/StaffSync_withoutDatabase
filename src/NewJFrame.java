@@ -234,7 +234,6 @@ private static Object con;
         jTable1 = new javax.swing.JTable();
         jButton15 = new javax.swing.JButton();
         jButton52 = new javax.swing.JButton();
-        jButton51 = new javax.swing.JButton();
         jButton40 = new javax.swing.JButton();
         jButton42 = new javax.swing.JButton();
         jPanel26 = new javax.swing.JPanel();
@@ -2119,34 +2118,20 @@ private static Object con;
             }
         });
 
-        jButton51.setBackground(new java.awt.Color(0, 160, 213));
-        jButton51.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton51.setForeground(new java.awt.Color(255, 255, 255));
-        jButton51.setText("Time Summarization");
-        jButton51.setPreferredSize(new java.awt.Dimension(139, 25));
-        jButton51.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton51ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
         jPanel25.setLayout(jPanel25Layout);
         jPanel25Layout.setHorizontalGroup(
             jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel25Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel25Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel25Layout.createSequentialGroup()
-                        .addComponent(jButton52, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton51, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(102, 102, 102)
-                        .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel25Layout.createSequentialGroup()
+                .addGap(86, 86, 86)
+                .addComponent(jButton52, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(117, 117, 117))
         );
         jPanel25Layout.setVerticalGroup(
             jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2156,8 +2141,7 @@ private static Object con;
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton52, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton51, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -2888,8 +2872,8 @@ catch (Exception e) {
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
         // TODO add your handling code here:
-         jTable2.setModel(new DefaultTableModel(null,new String[]{ "EmpId", "Emp Name", "Date","Status","Reasone", "Time in",
-        "Time out", "Total Time", "Remark in", "Remark out", "Half Day","Overtime"}));
+         jTable2.setModel(new DefaultTableModel(null,new String[]{ "EmpId", "Emp Name", "Date","Status","Ignore","Reasone", "Time in",
+        "Time out", "Total Time", "Remark in", "Remark out", "Half Day","Overtime","Daily Salery"}));
              try{
             String url = "jdbc:mysql://localhost:3306/biometric";
             String uname = "root";
@@ -2927,14 +2911,13 @@ String all = null;
                   all=sys_config;
                   
              }
-            // 
-         System.out.println(all);
-         //testing
+     
        while(rs.next()){
-    String id=String.valueOf(rs.getInt("Emp_id"));
+        String id=String.valueOf(rs.getInt("Emp_id"));
    String emp_name=String.valueOf(rs.getString("Emp_Name"));
    String date_part=String.valueOf(rs.getString("Date"));
    String status=String.valueOf(rs.getString("Status"));
+   String ignore=String.valueOf(rs.getString("ignoreing"));
    String reasone=String.valueOf(rs.getString("Reasone"));
    String time_in=String.valueOf(rs.getString("Time_in"));
    String time_out=String.valueOf(rs.getString("Time_out"));
@@ -2943,8 +2926,8 @@ String all = null;
    String Remark_out=String.valueOf(rs.getString("Remark_out"));
    String half_day=String.valueOf(rs.getString("Half_day"));
    String overtime =String.valueOf(rs.getString("Overtime"));
-   
-   String tbData[]={id,emp_name,date_part,status,reasone,time_in,time_out,toal_time,Remark_in,Remark_out,half_day,overtime};
+   String daily_salery=String.valueOf(rs.getString("Daily_salery"));
+   String tbData[]={id,emp_name,date_part,status,ignore,reasone,time_in,time_out,toal_time,Remark_in,Remark_out,half_day,overtime,daily_salery};
    DefaultTableModel tblModel=(DefaultTableModel)jTable2.getModel();
   tblModel.addRow(tbData);
          }
@@ -2973,11 +2956,12 @@ String all = null;
           Image img = Image.getInstance("support/KITS.png");
        img.scaleAbsolute(150,150);
        img.setAlignment(1);
-         PdfPTable table = new PdfPTable(12);
+        PdfPTable table = new PdfPTable(14);
            table.addCell("Emp Id");
             table.addCell("Emp Name");
              table.addCell("Date");
             table.addCell("Status");
+            table.addCell("Ignore");
             table.addCell("Reason");
              table.addCell("Time In");
               table.addCell("Time out");
@@ -2986,11 +2970,13 @@ String all = null;
                 table.addCell("Remark Out");
                 table.addCell("Half Day");
                    table.addCell("Overtime");
+                   table.addCell("Daily Salery");
                    while(resultSet.next()){
               table.addCell(resultSet.getString("Emp_Id"));
               table.addCell(resultSet.getString("Emp_Name"));
              table.addCell(resultSet.getString("Date"));
            table.addCell(resultSet.getString("Status"));
+           table.addCell(resultSet.getString("ignoreing"));
            table.addCell(resultSet.getString("Reasone"));
            table.addCell(resultSet.getString("Time_in"));
             table.addCell(resultSet.getString("Time_out"));
@@ -2999,9 +2985,10 @@ String all = null;
                 table.addCell(resultSet.getString("Remark_out"));
                  table.addCell(resultSet.getString("Half_day"));
                  table.addCell(resultSet.getString("Overtime"));
+                 table.addCell(resultSet.getString("Daily_salery"));
        
           }
-                                      float[] columnWidths = new float[]{10f,15f,18f,12f,14f,15f,15f,15f,12f,12f,12f,20f};
+                    float[] columnWidths = new float[]{10f,15f,12f,12f,12f,14f,15f,15f,15f,12f,12f,12f,10f,12f};
             table.setWidths(columnWidths);
               document.add(img);
           document.add(table);
@@ -3009,9 +2996,6 @@ String all = null;
            resultSet.close();
            s.close();
            document.close();
-  
-        
-         //testing end
          }
                     }
 catch (Exception e) {
@@ -3030,7 +3014,7 @@ catch (Exception e) {
         
         //Celanring table
          jTable2.setModel(new DefaultTableModel(null,new String[]{ "EmpId", "Emp Name", "Date","Status","Ignore","Reasone", "Time in",
-        "Time out", "Total Time", "Remark in", "Remark out", "Half Day","Overtime"}));
+        "Time out", "Total Time", "Remark in", "Remark out", "Half Day","Overtime","Daily Salery"}));
          
          try {
             String url = "jdbc:mysql://localhost:3306/biometric";
@@ -3048,7 +3032,6 @@ catch (Exception e) {
                 return; // Exit if connection fails
             } 
  
-           
             try {
               
                 String show = "select * from biometric.completion Order by Emp_id,Date;";
@@ -3069,11 +3052,12 @@ while(rs.next()){
    String Remark_out=String.valueOf(rs.getString("Remark_out"));
    String half_day=String.valueOf(rs.getString("Half_day"));
    String overtime =String.valueOf(rs.getString("Overtime"));
+   String daily_salery=String.valueOf(rs.getString("Daily_salery"));
    
   
    
    
-   String tbData[]={id,emp_name,date_part,status,ignore,reasone,time_in,time_out,toal_time,Remark_in,Remark_out,half_day,overtime};
+   String tbData[]={id,emp_name,date_part,status,ignore,reasone,time_in,time_out,toal_time,Remark_in,Remark_out,half_day,overtime,daily_salery};
    DefaultTableModel tblModel=(DefaultTableModel)jTable2.getModel();
   tblModel.addRow(tbData);
     
@@ -3100,11 +3084,12 @@ while(rs.next()){
           Image img = Image.getInstance("support/KITS.png");
        img.scaleAbsolute(150,150);
        img.setAlignment(1);
-           PdfPTable table = new PdfPTable(12);
+           PdfPTable table = new PdfPTable(14);
            table.addCell("Emp Id");
             table.addCell("Emp Name");
              table.addCell("Date");
             table.addCell("Status");
+            table.addCell("Ignore");
             table.addCell("Reason");
              table.addCell("Time In");
               table.addCell("Time out");
@@ -3113,11 +3098,14 @@ while(rs.next()){
                 table.addCell("Remark Out");
                 table.addCell("Half Day");
                    table.addCell("Overtime");
+                   table.addCell("Daily Salery");
                    while(resultSet.next()){
               table.addCell(resultSet.getString("Emp_Id"));
               table.addCell(resultSet.getString("Emp_Name"));
+              
              table.addCell(resultSet.getString("Date"));
            table.addCell(resultSet.getString("Status"));
+           table.addCell(resultSet.getString("ignoreing"));
            table.addCell(resultSet.getString("Reasone"));
            table.addCell(resultSet.getString("Time_in"));
             table.addCell(resultSet.getString("Time_out"));
@@ -3126,9 +3114,10 @@ while(rs.next()){
                 table.addCell(resultSet.getString("Remark_out"));
                  table.addCell(resultSet.getString("Half_day"));
                  table.addCell(resultSet.getString("Overtime"));
+                 table.addCell(resultSet.getString("Daily_salery"));
        
           }
-                    float[] columnWidths = new float[]{10f,15f,18f,12f,14f,15f,15f,15f,12f,12f,12f,20f};
+                    float[] columnWidths = new float[]{10f,15f,12f,12f,12f,14f,15f,15f,15f,12f,12f,12f,10f,12f};
             table.setWidths(columnWidths);
               document.add(img);
           document.add(table);
@@ -3316,7 +3305,25 @@ while(rs.next()){
 "END;";
             PreparedStatement finaleupdationholiday=con.prepareStatement(holiday_updation);
             finaleupdationholiday.executeUpdate();
-            
+              String count_dates = "SELECT COUNT(DISTINCT Date) AS distinctDateCount FROM biometric.completion";
+ PreparedStatement counting_date = con.prepareStatement(count_dates);
+  ResultSet resultSet = counting_date.executeQuery();
+int count=0;
+            // Process the result
+            if (resultSet.next()) {
+               count = resultSet.getInt("distinctDateCount");
+                System.out.println("Count of distinct dates: " + count);
+            }
+            String finale_salery = "UPDATE biometric.completion completion " +
+                         "JOIN biometric.emp emp ON completion.Emp_id = emp.Emp_no " +
+                         "SET completion.Daily_salery = CASE " +
+                         "  WHEN completion.status = 'Absent' THEN NULL " +
+                         "  ELSE ROUND(emp.Salery / ?, 2) " +
+                         "END;";
+             PreparedStatement mounthly_salery = con.prepareStatement(finale_salery);
+            // Set the divisor parameter in the query
+            mounthly_salery.setInt(1,count);
+            mounthly_salery.executeUpdate();
             } catch (ClassNotFoundException | SQLException e) {
                 e.printStackTrace();
                 return; // Exit if connection fails
@@ -4009,130 +4016,12 @@ catch (Exception e) {
         }  
     }//GEN-LAST:event_jButton18ActionPerformed
 
-    private void jButton51ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton51ActionPerformed
-        // TODO add your handling code here:
-        jTable1.setModel(new DefaultTableModel(null,new String[]{ "Emp Id", "Emp Name", "Total Days", "Total Time",
-        "Late", "Early Out", "Half Day"}));
-                try {
-            String url = "jdbc:mysql://localhost:3306/biometric";
-            String uname = "root";
-            String password = "123456789";
-
-            // Establish database connection
-            Connection con;
-            try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                con = DriverManager.getConnection(url, uname, password);
-                System.out.println("Database Connected");
-            } catch (ClassNotFoundException | SQLException e) {
-                e.printStackTrace();
-                return; // Exit if connection fails
-            } 
- 
-           
-            try {
-            
-                String show = " SELECT\n" +
-"    biometric.completion.Emp_id,\n" +
-"    biometric.completion.Emp_Name,\n" +
-"SUM(CASE WHEN Status = 'Present' THEN 1 ELSE 0 END) AS Total_days,\n" +
-"    SEC_TO_TIME(SUM(TIME_TO_SEC(time_out) - TIME_TO_SEC(time_in))) AS total_time,\n" +
-"    COUNT(Remark_in) AS Late,\n" +
-"    COUNT(Remark_out) AS Early_out,\n" +
-"    COUNT(half_day) AS Half_Day\n" +
-"FROM\n" +
-"    biometric.completion\n" +
-"GROUP BY\n" +
-"    biometric.completion.Emp_id, Emp_Name;" ;
-                PreparedStatement preparedStatement = con.prepareStatement(show);
-ResultSet rs=preparedStatement.executeQuery();
-while(rs.next()){
-    String id=String.valueOf(rs.getInt("Emp_id"));
-   String emp_name=String.valueOf(rs.getString("Emp_Name"));
-   String date_part=String.valueOf(rs.getString("total_days"));
-   String time_in=String.valueOf(rs.getString("total_time"));
-   String time_out=String.valueOf(rs.getString("Late"));
-   String total_time=String.valueOf(rs.getString("Early_out"));
-   String Remark_in=String.valueOf(rs.getString("Half_Day"));
-  
-   
-   
-   String tbData[]={id,emp_name,date_part,time_in,time_out,total_time,Remark_in};
-   DefaultTableModel tblModel=(DefaultTableModel)jTable1.getModel();
-  tblModel.addRow(tbData);
-    
-}
-      System.out.println("Database Connected");
-                java.sql.Statement statement = con.createStatement();
-                 ResultSet resultSet = statement.executeQuery("SELECT\n" +
-"    biometric.completion.Emp_id,\n" +
-"    biometric.completion.Emp_Name,\n" +
-"SUM(CASE WHEN Status = 'Present' THEN 1 ELSE 0 END) AS Total_days,\n" +
-"    SEC_TO_TIME(SUM(TIME_TO_SEC(time_out) - TIME_TO_SEC(time_in))) AS total_time,\n" +
-"    COUNT(Remark_in) AS Late,\n" +
-"    COUNT(Remark_out) AS Early_out,\n" +
-"    COUNT(half_day) AS Half_Day\n" +
-"FROM\n" +
-"    biometric.completion\n" +
-"GROUP BY\n" +
-"    biometric.completion.Emp_id, Emp_Name;");
-           java.sql.Statement s = con.createStatement();
-             Document document = new Document();
-          document.setPageSize(PageSize.A4.rotate());
-          
-          
-        try {
-            PdfWriter.getInstance(document,new FileOutputStream("output.pdf"));
-        } catch (DocumentException ex) {
-            Logger.getLogger(NewClass.class.getName()).log(Level.SEVERE, null, ex);
-        }
-         document.open();
-         Image img = Image.getInstance("support/KITS.png");
-     img.scaleAbsolute(150,150);
-      img.setAlignment(1);
-           PdfPTable table = new PdfPTable(7);
-           table.addCell("Emp Id");
-            table.addCell("Emp Name");
-            table.addCell("Total Days");
-             table.addCell("Total Time");
-              table.addCell("Late");
-                table.addCell("Early Out");
-               table.addCell("Half Day");
-               
-                
-                   while(resultSet.next()){
-              table.addCell(resultSet.getString("Emp_Id"));
-              table.addCell(resultSet.getString("Emp_Name"));
-             table.addCell(resultSet.getString("total_days"));
-           table.addCell(resultSet.getString("total_time"));
-            table.addCell(resultSet.getString("Late"));
-             table.addCell(resultSet.getString("Early_out"));
-               table.addCell(resultSet.getString("Half_Day"));
-            
-   
-          }
-                    float[] columnWidths = new float[]{10f,18f,12f,12f,12f,12f,12f};
-            table.setWidths(columnWidths);
-              document.add(img);
-          document.add(table);
-           statement.close();
-           resultSet.close();
-           s.close();
-           document.close();          
-                System.out.println("Data inserted successfully!");
-            } catch (Exception e) {  
-                e.printStackTrace();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } 
-    }//GEN-LAST:event_jButton51ActionPerformed
-
     private void jButton52ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton52ActionPerformed
         // TODO add your handling code here:
         
-        jTable1.setModel(new DefaultTableModel(null,new String[]{ "Emp Id", "Emp Name", "Absent", "Present",
-        "Holiday","Paid Leave","Consideration"}));
+        jTable1.setModel(new DefaultTableModel(null,new String[]{ "Emp Id", "Emp Name","Total Day", "Absent", "Present",
+        "Holiday","Paid Leave","Consideration","Total Time",
+        "Late", "Early Out", "Half Day","Salery"}));
                 try {
             String url = "jdbc:mysql://localhost:3306/biometric";
             String uname = "root";
@@ -4155,49 +4044,51 @@ while(rs.next()){
                 String show = "SELECT\n" +
 "    Emp_id,\n" +
 "    Emp_Name,\n" +
+"SUM(CASE WHEN Status IN ('Consideration', 'Holiday','Absent','Present','Paid leave') THEN 1 ELSE 0 END) AS Total_day,\n" +
 "    SUM(CASE WHEN Status = 'Absent' THEN 1 ELSE 0 END) AS Absent,\n" +
 "     SUM(CASE WHEN Status = 'Present' THEN 1 ELSE 0 END) AS Present,\n" +
 "      SUM(CASE WHEN Status = 'Holiday' THEN 1 ELSE 0 END) AS Holiday,\n" +
 "       SUM(CASE WHEN Status = 'Paid leave' THEN 1 ELSE 0 END) AS Paid_Leave,\n"+ 
-        "SUM(CASE WHEN Status = 'Consideration' THEN 1 ELSE 0 END) AS Consideration\n" +
-"      \n" +
+        "SUM(CASE WHEN Status = 'Consideration' THEN 1 ELSE 0 END) AS Consideration,\n" +
+ "SUM(CASE WHEN Status = 'Consideration' THEN 1 ELSE 0 END) AS Consideration,\n" +
+
+"    SEC_TO_TIME(SUM(TIME_TO_SEC(time_out) - TIME_TO_SEC(time_in))) AS total_time,\n" +
+"    COUNT(Remark_in) AS Late,\n" +
+"    COUNT(Remark_out) AS Early_out,\n" +
+"    COUNT(half_day) AS Half_Day,"
+                        + "round(sum(Daily_salery)) As Salery\n" +
 "     FROM\n" +
 "    biometric.completion\n" +
 "GROUP BY\n" +
 "    Emp_id, Emp_Name;";
+                
+                
                 PreparedStatement preparedStatement = con.prepareStatement(show);
 ResultSet rs=preparedStatement.executeQuery();
 while(rs.next()){
     String id=String.valueOf(rs.getInt("Emp_id"));
    String emp_name=String.valueOf(rs.getString("Emp_Name"));
-   String date_part=String.valueOf(rs.getString("Absent"));
-   String time_in=String.valueOf(rs.getString("Present"));
-   String time_out=String.valueOf(rs.getString("Holiday"));
+   String total_day=String.valueOf(rs.getString("Total_day"));
+   String absent=String.valueOf(rs.getString("Absent"));
+   String present=String.valueOf(rs.getString("Present"));
+   String holiday=String.valueOf(rs.getString("Holiday"));
     String leave=String.valueOf(rs.getString("Paid_Leave"));
      String consideration=String.valueOf(rs.getString("Consideration"));
-  
+   String time_in=String.valueOf(rs.getString("total_time"));
+   String time_out=String.valueOf(rs.getString("Late"));
+   String total_time=String.valueOf(rs.getString("Early_out"));
+   String Remark_in=String.valueOf(rs.getString("Half_Day"));
+   String Salery=String.valueOf(rs.getString("Salery"));
    
-      String tbData[]={id,emp_name,date_part,time_in,time_out,leave,consideration};
+      String tbData[]={id,emp_name,total_day,absent,present,holiday,leave,consideration,time_in,time_out,total_time,Remark_in,Salery};
    DefaultTableModel tblModel=(DefaultTableModel)jTable1.getModel();
   tblModel.addRow(tbData);
     
 }
-      System.out.println("Database Connected");
-                java.sql.Statement statement = con.createStatement();
-                 ResultSet resultSet = statement.executeQuery("SELECT\n" +
-"    Emp_id,\n" +
-"    Emp_Name,\n" +
-"    SUM(CASE WHEN Status = 'Absent' THEN 1 ELSE 0 END) AS Absent,\n" +
-"     SUM(CASE WHEN Status = 'Present' THEN 1 ELSE 0 END) AS Present,\n" +
-"      SUM(CASE WHEN Status = 'Holiday' THEN 1 ELSE 0 END) AS Holiday,\n" +
-"       SUM(CASE WHEN Status = 'Paid leave' THEN 1 ELSE 0 END) AS Paid_Leave,\n" +
-       "SUM(CASE WHEN Status = 'Consideration' THEN 1 ELSE 0 END) AS Consideration\n" +
-"      \n" +
-"     FROM\n" +
-"    biometric.partiale_completion\n" +
-"GROUP BY\n" +
-"    Emp_id, Emp_Name;");
-           java.sql.Statement s = con.createStatement();
+     
+               
+                 ResultSet resultSet = preparedStatement.executeQuery(show);
+        //   java.sql.Statement s = con.createStatement();
              Document document = new Document();
           document.setPageSize(PageSize.A4.rotate());
            document.setMargins(0, 0, 0, 0);
@@ -4212,36 +4103,47 @@ while(rs.next()){
           Image img = Image.getInstance("support/KITS.png");
        img.scaleAbsolute(150,150);
        img.setAlignment(1);
-           PdfPTable table = new PdfPTable(7);
+           PdfPTable table = new PdfPTable(13);
            table.addCell("Emp Id");
             table.addCell("Emp Name");
+            table.addCell("Total Day");
             table.addCell("Absent");
              table.addCell("Present");
               table.addCell("Holiday");
                table.addCell("Paid Leave");
                  table.addCell("Consideration");
+                     table.addCell("Total Time");
+              table.addCell("Late");
+                table.addCell("Early Out");
+               table.addCell("Half Day");
+               table.addCell("Salery");
              
                
                 
                    while(resultSet.next()){
               table.addCell(resultSet.getString("Emp_Id"));
               table.addCell(resultSet.getString("Emp_Name"));
+              table.addCell(resultSet.getString("Total_day"));
              table.addCell(resultSet.getString("Absent"));
            table.addCell(resultSet.getString("Present"));
             table.addCell(resultSet.getString("Holiday"));
              table.addCell(resultSet.getString("Paid_Leave"));
               table.addCell(resultSet.getString("Consideration"));
-             
+              table.addCell(resultSet.getString("total_time"));
+            table.addCell(resultSet.getString("Late"));
+             table.addCell(resultSet.getString("Early_out"));
+               table.addCell(resultSet.getString("Half_Day"));
+               table.addCell(resultSet.getString("Salery"));
             
    
           }
-                    float[] columnWidths = new float[]{10f,18f,12f,12f,12f,12f,12f};
+                    float[] columnWidths = new float[]{8f,18f,8f,10f,12f,12f,10f,12f,13f,8f,12f,12f,12f};
             table.setWidths(columnWidths);
               document.add(img);
           document.add(table);
-           statement.close();
+         
            resultSet.close();
-           s.close();
+       //    s.close();
            document.close();          
                 System.out.println("Data inserted successfully!");
             } catch (Exception e) {  
@@ -4466,7 +4368,7 @@ catch (Exception e) {
 
     private void jButton56ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton56ActionPerformed
         // TODO add your handling code here:
-        jTable5.setModel(new DefaultTableModel(null,new String[]{ "Emp ID", "Emp Name"}));
+        jTable5.setModel(new DefaultTableModel(null,new String[]{ "Emp ID", "Emp Name","Salery"}));
         try {
             String url = "jdbc:mysql://localhost:3306/biometric";
             String uname = "root";
@@ -4485,7 +4387,8 @@ catch (Exception e) {
                 while(rs.next()){
                     String id=String.valueOf(rs.getInt("Emp_no"));
                     String emp_name=String.valueOf(rs.getString("Emp_Name"));
-                    String tbData[]={id,emp_name};
+                    String salery=String.valueOf(rs.getInt("Salery"));
+                    String tbData[]={id,emp_name,salery};
                     DefaultTableModel tblModel=(DefaultTableModel)jTable5.getModel();
                     tblModel.addRow(tbData);}
             } catch (ClassNotFoundException | SQLException e) {
@@ -4521,7 +4424,7 @@ catch (Exception e) {
                 e.printStackTrace();
                 return; // Exit if connection fails
             }
-            String insertSql = "INSERT INTO biometric.emp(Emp_no,Emp_Name)value(?,?)";
+            String insertSql = "INSERT INTO biometric.emp(Emp_no,Emp_Name,Salery)value(?,?,?)";
             String deleteSql = "DELETE FROM biometric.emp;";
             PreparedStatement deleteing = con.prepareStatement(deleteSql);
             deleteing.executeUpdate();
@@ -4534,8 +4437,10 @@ catch (Exception e) {
                     StringTokenizer st = new StringTokenizer(line, ",");
                     int emp_id = Integer.parseInt(st.nextToken());
                     String emp_name = st.nextToken();
+                    int salery = Integer.parseInt(st.nextToken());
                     preparedStatement.setInt(1,emp_id);
                     preparedStatement.setString(2,emp_name);
+                    preparedStatement.setInt(3,salery);
                     preparedStatement.executeUpdate();
                 }
 
@@ -4912,7 +4817,6 @@ catch (Exception e) {
     private javax.swing.JButton jButton48;
     private javax.swing.JButton jButton49;
     private javax.swing.JButton jButton50;
-    private javax.swing.JButton jButton51;
     private javax.swing.JButton jButton52;
     private javax.swing.JButton jButton53;
     private javax.swing.JButton jButton54;
