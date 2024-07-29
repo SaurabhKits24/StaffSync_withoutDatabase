@@ -33,6 +33,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import javax.swing.ImageIcon;
@@ -124,6 +125,9 @@ private static Object con;
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
+        jLabel56 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -234,6 +238,7 @@ private static Object con;
         jTable1 = new javax.swing.JTable();
         jButton15 = new javax.swing.JButton();
         jButton52 = new javax.swing.JButton();
+        jButton60 = new javax.swing.JButton();
         jButton40 = new javax.swing.JButton();
         jButton42 = new javax.swing.JButton();
         jPanel26 = new javax.swing.JPanel();
@@ -758,6 +763,22 @@ private static Object con;
                 .addContainerGap())
         );
 
+        jLabel56.setText("Convert tool");
+
+        jButton3.setText("Convert file");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Show File");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -778,6 +799,14 @@ private static Object con;
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton29)
                         .addGap(27, 27, 27))))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(jLabel56)
+                .addGap(42, 42, 42)
+                .addComponent(jButton3)
+                .addGap(96, 96, 96)
+                .addComponent(jButton4)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -790,7 +819,12 @@ private static Object con;
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel41, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel56)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton27)
                     .addComponent(jButton29))
@@ -2118,31 +2152,47 @@ private static Object con;
             }
         });
 
+        jButton60.setBackground(new java.awt.Color(91, 239, 98));
+        jButton60.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton60.setForeground(new java.awt.Color(255, 255, 255));
+        jButton60.setText("Salery formula");
+        jButton60.setPreferredSize(new java.awt.Dimension(174, 25));
+        jButton60.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton60ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
         jPanel25.setLayout(jPanel25Layout);
         jPanel25Layout.setHorizontalGroup(
             jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel25Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel25Layout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addComponent(jButton52, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(117, 117, 117))
+                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel25Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel25Layout.createSequentialGroup()
+                        .addComponent(jButton52, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(72, 72, 72)
+                        .addComponent(jButton60, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel25Layout.setVerticalGroup(
             jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel25Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton52, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton52, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton60, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(37, 37, 37))
         );
 
         jButton40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-previous-32.png"))); // NOI18N
@@ -2224,7 +2274,7 @@ private static Object con;
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(196, 196, 196)
                         .addComponent(jPanel26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton40)
                     .addComponent(jButton42))
@@ -3316,10 +3366,7 @@ int count=0;
             }
             String finale_salery = "UPDATE biometric.completion completion " +
                          "JOIN biometric.emp emp ON completion.Emp_id = emp.Emp_no " +
-                         "SET completion.Daily_salery = CASE " +
-                         "  WHEN completion.status = 'Absent' THEN NULL " +
-                         "  ELSE ROUND(emp.Salery / ?, 2) " +
-                         "END;";
+                         "SET completion.Daily_salery = ROUND(emp.Salery / ?, 2);";
              PreparedStatement mounthly_salery = con.prepareStatement(finale_salery);
             // Set the divisor parameter in the query
             mounthly_salery.setInt(1,count);
@@ -4403,11 +4450,13 @@ catch (Exception e) {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        JFileChooser chooser = new JFileChooser();
+        
+        
+     /*  JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
         File f = chooser.getSelectedFile();
-        String employee=f.getAbsolutePath();
-        // jTextField1.setText(filename);
+        String employee=f.getAbsolutePath();*/
+     String employee =  "output.csv";
         System.out.println(employee);
         try {
             String url = "jdbc:mysql://localhost:3306/biometric";
@@ -4431,6 +4480,9 @@ catch (Exception e) {
             try (BufferedReader  reader = new BufferedReader (new FileReader(employee))) {
                 String line;
                 PreparedStatement preparedStatement = con.prepareStatement(insertSql);
+if ((line = reader.readLine()) != null) {
+    // First line is read and ignored
+}
 
                 while ((line = reader.readLine()) != null) {
                     String[] data = line.split("\t");
@@ -4724,6 +4776,201 @@ try {
         }
 
     }//GEN-LAST:event_jButton21ActionPerformed
+
+    private void jButton60ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton60ActionPerformed
+        // TODO add your handling code here:
+           
+        jTable1.setModel(new DefaultTableModel(null,new String[]{ "Emp Id", "Emp Name","Total Day", "Absent", "Half Day",
+        "Late","Salery","Finale Late","Finale Half Day","Finale Total", "Daily Salery", "Finale Salery"}));
+                try {
+            String url = "jdbc:mysql://localhost:3306/biometric";
+            String uname = "root";
+            String password = "123456789";
+
+            // Establish database connection
+            Connection con;
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                con = DriverManager.getConnection(url, uname, password);
+                System.out.println("Database Connected");
+            } catch (ClassNotFoundException | SQLException e) {
+                e.printStackTrace();
+                return; // Exit if connection fails
+            } 
+ 
+           
+            try {
+            
+                String show = " SELECT\n" +
+"      Emp_id,\n" +
+"    Emp_Name,\n" +
+"    SUM(CASE WHEN Status IN ('Consideration', 'Holiday', 'Absent', 'Present', 'Paid leave') THEN 1 ELSE 0 END) AS Total_day,\n" +
+"    SUM(CASE WHEN Status = 'Absent' THEN 1 ELSE 0 END) AS Absent,\n" +
+"    SUM(CASE WHEN Remark_in IS NOT NULL THEN 1 ELSE 0 END) AS Late,\n" +
+"    SUM(CASE WHEN half_day IS NOT NULL THEN 1 ELSE 0 END) AS Half_Day,\n" +
+"    ROUND(SUM(Daily_salery)) AS Salery,\n" +
+"    FLOOR(SUM(CASE WHEN Remark_in IS NOT NULL THEN 1 ELSE 0 END) / 3) AS finale_late,\n" +
+"    FLOOR(SUM(CASE WHEN half_day IS NOT NULL THEN 1 ELSE 0 END) / 2) AS finale_half_day,\n" +
+"    FLOOR(SUM(CASE WHEN Status = 'Absent' THEN 1 ELSE 0 END) +\n" +
+"          FLOOR(SUM(CASE WHEN Remark_in IS NOT NULL THEN 1 ELSE 0 END) / 3) +\n" +
+"          FLOOR(SUM(CASE WHEN half_day IS NOT NULL THEN 1 ELSE 0 END) / 2)) AS finale_total,\n" +
+"           ROUND(SUM(Daily_salery)/30) As DailySalery,\n" +
+"           ROUND(SUM(Daily_salery)) - ( ROUND(SUM(Daily_salery)/30)* ( FLOOR(SUM(CASE WHEN Status = 'Absent' THEN 1 ELSE 0 END) +\n" +
+"          FLOOR(SUM(CASE WHEN Remark_in IS NOT NULL THEN 1 ELSE 0 END) / 3) +\n" +
+"          FLOOR(SUM(CASE WHEN half_day IS NOT NULL THEN 1 ELSE 0 END) / 2)))) As finaleSalery\n" +
+"FROM\n" +
+"    biometric.completion\n" +
+"GROUP BY\n" +
+"    Emp_id, Emp_Name; ";
+                
+                
+                PreparedStatement preparedStatement = con.prepareStatement(show);
+ResultSet rs=preparedStatement.executeQuery();
+while(rs.next()){
+    String id=String.valueOf(rs.getInt("Emp_id"));
+   String emp_name=String.valueOf(rs.getString("Emp_Name"));
+   String total_day=String.valueOf(rs.getString("Total_day"));
+   String absent=String.valueOf(rs.getString("Absent"));
+   String late=String.valueOf(rs.getString("Late"));
+   String half_day=String.valueOf(rs.getString("Half_Day"));
+    String salery=String.valueOf(rs.getString("Salery"));
+     String final_late=String.valueOf(rs.getString("finale_late"));
+   String final_half_day=String.valueOf(rs.getString("finale_half_day"));
+   String final_total=String.valueOf(rs.getString("finale_total"));
+   String daily_salery=String.valueOf(rs.getString("DailySalery"));
+   String finaleSalery=String.valueOf(rs.getString("finaleSalery"));
+   
+      String tbData[]={id,emp_name,total_day,absent,late,half_day,salery,final_late,final_half_day,final_total,daily_salery,finaleSalery};
+   DefaultTableModel tblModel=(DefaultTableModel)jTable1.getModel();
+  tblModel.addRow(tbData);
+    
+}
+     
+               
+                 ResultSet resultSet = preparedStatement.executeQuery(show);
+        //   java.sql.Statement s = con.createStatement();
+             Document document = new Document();
+          document.setPageSize(PageSize.A4.rotate());
+           document.setMargins(0, 0, 0, 0);
+          
+          
+        try {
+            PdfWriter.getInstance(document,new FileOutputStream("output.pdf"));
+        } catch (DocumentException ex) {
+            Logger.getLogger(NewClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         document.open();
+          Image img = Image.getInstance("support/KITS.png");
+       img.scaleAbsolute(150,150);
+       img.setAlignment(1);
+           PdfPTable table = new PdfPTable(12);
+           table.addCell("Emp Id");
+            table.addCell("Emp Name");
+            table.addCell("Total Day");
+            table.addCell("Absent");
+             table.addCell("Late");
+              table.addCell("Half Day");
+               table.addCell("Saley");
+                 table.addCell("Final Late");
+                     table.addCell("Final Half Day");
+              table.addCell("Final Total");
+                table.addCell("Daily Salery");
+               table.addCell("Final Salery");
+              
+             
+               
+                
+                   while(resultSet.next()){
+              table.addCell(resultSet.getString("Emp_Id"));
+              table.addCell(resultSet.getString("Emp_Name"));
+              table.addCell(resultSet.getString("Total_day"));
+             table.addCell(resultSet.getString("Absent"));
+           table.addCell(resultSet.getString("Late"));
+            table.addCell(resultSet.getString("Half_Day"));
+             table.addCell(resultSet.getString("Salery"));
+              table.addCell(resultSet.getString("finale_late"));
+              table.addCell(resultSet.getString("finale_half_day"));
+            table.addCell(resultSet.getString("finale_total"));
+             table.addCell(resultSet.getString("DailySalery"));
+               table.addCell(resultSet.getString("finaleSalery"));           
+   
+          }
+                    float[] columnWidths = new float[]{8f,18f,8f,10f,12f,12f,10f,12f,13f,8f,12f,12f};
+            table.setWidths(columnWidths);
+              document.add(img);
+          document.add(table);
+         
+           resultSet.close();
+       //    s.close();
+           document.close();          
+                System.out.println("Data inserted successfully!");
+            } catch (Exception e) {  
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
+                
+    }//GEN-LAST:event_jButton60ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+       File f = chooser.getSelectedFile();
+        //String employee=f.getAbsolutePath();
+        
+         String inputFilePath = f.getAbsolutePath();  // Path to your input .dat file
+     System.out.println(inputFilePath) ;
+        String convertemploy = "output.csv";  // Path to the output .csv file
+
+        try (BufferedReader br = new BufferedReader(new FileReader(inputFilePath));
+             FileWriter fw = new FileWriter(convertemploy)) {
+
+            fw.write("Number,Name,Salery\n");  // Write the header line
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                // Split the line based on the delimiter
+                String[] parts = line.split("[^\\x20-\\x7E]+");
+                for (int i = 0; i < parts.length - 1; i += 2) {
+                    String firstPart = parts[i].trim();
+                    String secondPart = parts[i + 1].trim();
+
+                    // Check which part is a number and which part is a name
+                    if (firstPart.matches("\\d+")) {
+                        fw.write(firstPart + "," + secondPart + "\n");
+                    } else if (secondPart.matches("\\d+")) {
+                        fw.write(secondPart + "," + firstPart + "\n");
+                    }
+                }
+            }
+
+            System.out.println("Conversion completed successfully!");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+          try{
+            File file=new File("output.csv");
+            if(file.exists()){
+                if(Desktop.isDesktopSupported()){
+                   Desktop.getDesktop().open(file);
+                }else{
+                    JOptionPane.showMessageDialog(this,"not supported");
+                }
+            }else{
+                JOptionPane.showMessageDialog(this,"File not exist");
+            }
+        }
+        catch(Exception e){
+            
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
   
     /**
      * @param args the command line arguments
@@ -4803,6 +5050,7 @@ catch (Exception e) {
     private javax.swing.JButton jButton26;
     private javax.swing.JButton jButton27;
     private javax.swing.JButton jButton29;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton30;
     private javax.swing.JButton jButton32;
     private javax.swing.JButton jButton33;
@@ -4810,6 +5058,7 @@ catch (Exception e) {
     private javax.swing.JButton jButton35;
     private javax.swing.JButton jButton37;
     private javax.swing.JButton jButton38;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton40;
     private javax.swing.JButton jButton42;
     private javax.swing.JButton jButton45;
@@ -4826,6 +5075,7 @@ catch (Exception e) {
     private javax.swing.JButton jButton58;
     private javax.swing.JButton jButton59;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton60;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JCheckBox jCheckBox1;
@@ -4902,6 +5152,7 @@ catch (Exception e) {
     private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel55;
+    private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -4982,7 +5233,7 @@ setIconImage(originalImage);
 
     private void holidayCatogoryList() {
          jComboBox3.addItem("** Select Holiday **");
-         cleanholidaylist();
+    
           try {
               
               cleanholidaylist();
@@ -5027,7 +5278,7 @@ ResultSet rs=preparedStatement.executeQuery();
     private void decideHoliday() {
     
         jComboBox7.addItem("** Select Holiday **");
-        cleanholidaylist();
+      clearholidaylist();
            try {
             String url = "jdbc:mysql://localhost:3306/biometric";
             String uname = "root";
@@ -5384,11 +5635,14 @@ ResultSet rs=preparedStatement.executeQuery();
            jComboBox3.removeItemAt(1); // Remove item at index 1
            cleanholidaylist();
         }
-      if (jComboBox7.getItemCount() > 1) {
-           jComboBox7.removeItemAt(1); // Remove item at index 1
-           cleanholidaylist();
-        }
+  
     }
+      private void clearholidaylist(){
+              if (jComboBox7.getItemCount() > 1) {
+           jComboBox7.removeItemAt(1); // Remove item at index 1
+           clearholidaylist();
+        }
+      }
         private void cleandatalist() {
      if (jComboBox2.getItemCount() > 1) {
            jComboBox2.removeItemAt(1); // Remove item at index 1

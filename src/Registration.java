@@ -1,8 +1,14 @@
 
+
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 import java.util.Base64;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.crypto.SecretKey;
@@ -203,12 +209,8 @@ public class Registration extends javax.swing.JFrame {
              String FirstName=edtfirstname.getText();
             String LastName=edtlastname.getText();
                     String password=edtpassword.getText();
-                    //String mobilenumber=edtphonenumber.getText();
-//long PhoneNumber=Integer.parseInt(mobilenumber);
-//System.out.println(PhoneNumber);
 String System_data="";
 String EmailID=edtmailid.getText();
-
       shadata  aes= new shadata();
         SecretKey secretKey = aes.generateAESKey();
      String store=Base64.getEncoder().encodeToString(secretKey.getEncoded());
@@ -223,11 +225,12 @@ String EmailID=edtmailid.getText();
 inserting.setString(2, LastName);
 //inserting.setLong(3,PhoneNumber);
 inserting.setString(3, EmailID);
-               inserting.setString(4, encryptedPassword);
+              inserting.setString(4, encryptedPassword);
               inserting.setString(5, store);
-inserting.setString(6, System_data);
-System.out.println(inserting);
-             int rowsInserted = inserting.executeUpdate();
+              inserting.setString(6, System_data);
+              int rowsInserted = inserting.executeUpdate();
+              freetrial();
+
   
        } catch (Exception ex) {
             Logger.getLogger(Registration.class.getName()).log(Level.SEVERE, null, ex);
@@ -299,4 +302,19 @@ System.out.println(inserting);
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    private void freetrial() { CompareDateTime compare = new CompareDateTime();
+        String fileName = "datetime.dat";
+    
+    File file = new File(fileName);
+    String storedDateTimeStr;
+             
+               try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(file))) {
+            Date currentDateTime = new Date();
+            String formattedDateTime = compare.formatDateTime(currentDateTime);
+            dos.writeUTF(formattedDateTime);
+            System.out.println("File created with current date and time: " + formattedDateTime);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }  }
 }

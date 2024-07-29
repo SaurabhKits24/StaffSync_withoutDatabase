@@ -46,8 +46,6 @@ public class PartialReset extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 204));
 
-        searchmail.setText("jTextField1");
-
         jLabel1.setText("Enter Your Mail ID:");
 
         jButton1.setText("Confirm");
@@ -108,6 +106,7 @@ public class PartialReset extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 // TODO add your handling code here:
      findmail=searchmail.getText();
+
          
         try {
             Connection con = connection.getConnection();

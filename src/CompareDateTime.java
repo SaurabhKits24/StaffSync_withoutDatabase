@@ -35,6 +35,7 @@ public static void main(String[] args) {
         }
     } else {
         // File does not exist, create it and store current date and time
+        
         try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(file))) {
             Date currentDateTime = new Date();
             String formattedDateTime = formatDateTime(currentDateTime);
@@ -45,7 +46,7 @@ public static void main(String[] args) {
         }
     }
 }
-private static boolean isExpired(Date storedDateTime) {
+public static boolean isExpired(Date storedDateTime) {
     // Calculate expiration date as 6 months from storedDateTime
     Calendar calendar = Calendar.getInstance();
     calendar.setTime(storedDateTime);
@@ -58,24 +59,24 @@ private static boolean isExpired(Date storedDateTime) {
     return currentDate.after(expirationDate);
 }
 
-private static Date parseDateTime(String dateTimeStr) throws ParseException {
+public static Date parseDateTime(String dateTimeStr) throws ParseException {
     SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
     return dateFormat.parse(dateTimeStr);
 }
 
-private static String formatDateTime(Date dateTime) {
+public static String formatDateTime(Date dateTime) {
     SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
     return dateFormat.format(dateTime);
 }
 
-    private static void waitForEnterKeyPress() { System.out.println("Press Enter to continue...");
+    public static void waitForEnterKeyPress() { System.out.println("Press Enter to continue...");
         try {
             System.in.read(); // This will wait for the user to press Enter
         } catch (IOException e) {
             e.printStackTrace();
         }  }
 
-    private static void updateFileWithCurrentDateTime(File file) {
+    public static void updateFileWithCurrentDateTime(File file) {
         try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(file))) {
             Date currentDateTime = new Date();
             String formattedDateTime = formatDateTime(currentDateTime);

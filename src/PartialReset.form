@@ -80,9 +80,6 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JTextField" name="searchmail">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jTextField1"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>

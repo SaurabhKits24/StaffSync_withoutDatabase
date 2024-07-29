@@ -1,6 +1,13 @@
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Base64;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.crypto.SecretKey;
+import javax.swing.JOptionPane;
+
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -18,7 +25,8 @@ public class ResetPassword extends javax.swing.JFrame {
      */
     public String gotmail;
     public ResetPassword(String findmail) {
-        gotmail=findmail;
+       
+    System.out.print(gotmail=findmail);
         initComponents();
     }
 
@@ -125,16 +133,40 @@ public class ResetPassword extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         // TODO add your handling code here:
-    PartialReset pr = new PartialReset();
     
         String changepassword=changepassord.getText();
-        String confirmchangepassword=confirmchangepasswrod.getText();
+        String confirmchangepassword="";
+        confirmchangepassword=confirmchangepasswrod.getText();
         if (changepassword.equals(confirmchangepassword)) {
-            shadata  aes= new shadata();
+            try {
+                System.out.print(gotmail);
+                
+                shadata  aes= new shadata();
+                SecretKey secretKey = aes.generateAESKey();
+                String store=Base64.getEncoder().encodeToString(secretKey.getEncoded());
+                   String encryptedPassword = aes.encrypt(confirmchangepassword,secretKey);
+            System.out.println("Encrypted: " + encryptedPassword);
+                Connection con = connection.getConnection();
+                String changepasswordquery ="UPDATE biometric.userdata SET Password=?,private_key=? WHERE Mail_id=? ";
+                PreparedStatement changingpassword = con.prepareStatement(changepasswordquery);
+               changingpassword.setString(1,encryptedPassword);
+                changingpassword.setString(2,store );
+                changingpassword.setString(3,gotmail);
+                changingpassword.executeUpdate();
+                  dispose();
+         LoginPage main = new LoginPage();
+                        main.show();
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(ResetPassword.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(ResetPassword.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
+ 
        
-    
         } else {
-            System.out.println("str1 and str2 are not equal.");
+           JOptionPane.showMessageDialog(this,"Match the password");
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -1,3 +1,6 @@
+
+import java.io.File;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -36,6 +39,11 @@ public class PlanExpire extends javax.swing.JFrame {
         jLabel1.setText("Your Plan is  Expire");
 
         jButton1.setText("Buy Now");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -73,6 +81,17 @@ public class PlanExpire extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+         CompareDateTime compare = new CompareDateTime();
+         String fileName = "datetime.dat";
+          File file = new File(fileName);
+         compare.updateFileWithCurrentDateTime(file); // Update file with current date and time
+          dispose();
+         LoginPage logingpage = new LoginPage();
+                        logingpage.show();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

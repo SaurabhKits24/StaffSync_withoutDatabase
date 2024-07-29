@@ -1,7 +1,13 @@
 
 
 import java.awt.HeadlessException;
-
+import java.io.*;
+import static java.lang.Short.compare;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Scanner;
 import java.sql.*;
 import java.util.Base64;
 import java.util.logging.Level;
@@ -48,6 +54,7 @@ public class LoginPage extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         edtUsername = new javax.swing.JTextField();
         edtPassword = new javax.swing.JPasswordField();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,6 +76,13 @@ public class LoginPage extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setText("Forgot Password");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -83,14 +97,16 @@ public class LoginPage extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(102, 102, 102)
                         .addComponent(jButton1)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(217, 217, 217)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(edtUsername)
                             .addComponent(edtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE))
                         .addContainerGap(124, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2)
                         .addGap(205, 205, 205))))
@@ -109,7 +125,8 @@ public class LoginPage extends javax.swing.JFrame {
                 .addGap(101, 101, 101)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
                 .addContainerGap(112, Short.MAX_VALUE))
         );
 
@@ -121,8 +138,8 @@ public class LoginPage extends javax.swing.JFrame {
         
         try{
          //   Class.forName("com.mysql.jdbc.Driver");
-           //  java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/login","root","123456789");
-            Connection con = connection.getConnection();
+           //  java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/biometrics","root","123456789");
+           Connection con = connection.getConnection();
   String username=edtUsername.getText();
      String store= edtPassword.getText();
        
@@ -158,11 +175,10 @@ ResultSet rs = stm.executeQuery();
 
          
          if(rs.next()){
-              dispose();
-               
-                  
-                        NewJFrame main = new NewJFrame();
-                        main.show();
+            
+                        
+                        freetrial();
+                        
                    
             }else{
                 JOptionPane.showMessageDialog(this,"Username or Password wrong");
@@ -182,6 +198,15 @@ ResultSet rs = stm.executeQuery();
    Registration main = new Registration();
                         main.show();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+         dispose();
+               
+                  
+                        PartialReset main = new PartialReset();
+                        main.show();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,9 +239,54 @@ ResultSet rs = stm.executeQuery();
     private javax.swing.JTextField edtUsername;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
+
+    private void freetrial() {
+        CompareDateTime compare = new CompareDateTime();
+        String fileName = "datetime.dat";
+    
+    File file = new File(fileName);
+    String storedDateTimeStr;
+
+    // Check if file exists
+    if (file.exists()) {
+        // File exists, read date and time from the file
+        try (DataInputStream dis = new DataInputStream(new FileInputStream(file))) {
+            storedDateTimeStr = dis.readUTF();
+            System.out.println("Date and time read from file: " + storedDateTimeStr);
+
+            // Compare stored date and time with current date and time
+            Date storedDateTime = compare.parseDateTime(storedDateTimeStr);
+
+            if (compare.isExpired(storedDateTime)) {
+                  dispose();
+                               
+                        PlanExpire main = new PlanExpire();
+                        main.show();
+                
+            } else {
+                 dispose();        
+                        NewJFrame main = new NewJFrame();
+                        main.show();
+            }
+
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }}
+    else{
+         try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(file))) {
+            Date currentDateTime = new Date();
+            String formattedDateTime = compare.formatDateTime(currentDateTime);
+            dos.writeUTF(formattedDateTime);
+            System.out.println("File created with current date and time: " + formattedDateTime);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } 
+    }
+    }
 
    
 
