@@ -1,3 +1,12 @@
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -8,6 +17,8 @@
  * @author Dell
  */
 public class PartialReset extends javax.swing.JFrame {
+ private String sharedVariable;
+    public String findmail;
 
     /**
      * Creates new form PartialReset
@@ -26,7 +37,7 @@ public class PartialReset extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        searchmail = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -35,11 +46,16 @@ public class PartialReset extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 204));
 
-        jTextField1.setText("jTextField1");
+        searchmail.setText("jTextField1");
 
         jLabel1.setText("Enter Your Mail ID:");
 
         jButton1.setText("Confirm");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Reset Password");
 
@@ -51,7 +67,7 @@ public class PartialReset extends javax.swing.JFrame {
                 .addGap(90, 90, 90)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(searchmail, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(99, 99, 99)
                 .addComponent(jButton1)
                 .addGap(131, 131, 131))
@@ -67,7 +83,7 @@ public class PartialReset extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(90, 90, 90)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchmail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1)
                     .addComponent(jLabel1))
                 .addContainerGap(242, Short.MAX_VALUE))
@@ -88,6 +104,40 @@ public class PartialReset extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+// TODO add your handling code here:
+     findmail=searchmail.getText();
+         
+        try {
+            Connection con = connection.getConnection();
+            String findquery="select count(*) from biometric.userdata where Mail_id = ?;";
+            PreparedStatement statement = con.prepareStatement(findquery);
+             statement.setString(1, findmail);
+               ResultSet resultSet = statement.executeQuery();
+            resultSet.next(); // Move to the first result
+
+            // Check if the data exists
+            int count = resultSet.getInt(1); // Get the count
+            
+            if (count > 0) {  
+             ResetPassword rs=new ResetPassword(findmail);
+                dispose();
+            ResetPassword main = new ResetPassword(findmail);
+                        main.show();
+
+            } else {
+                JOptionPane.showMessageDialog(this,"Enter the Correct Mail id");
+            }
+
+            // Close resources
+            resultSet.close();
+            statement.close();
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(PartialReset.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -129,6 +179,8 @@ public class PartialReset extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField searchmail;
     // End of variables declaration//GEN-END:variables
+
+  
 }
